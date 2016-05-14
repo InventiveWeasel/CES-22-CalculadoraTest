@@ -153,6 +153,33 @@ public class CalculatorEngineTest{
         botClick(equal);
         assertEquals(3525.4668, calc.getValue(),0.000000001);
         
+        
+        //Teste para a operacao de divisao: 1,02 / 3456,34 = 0,00029511
+        botClick(clr);
+        p = calc.getButtonLocation(calc.one);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.zero);
+        botClick(p);
+        p = calc.getButtonLocation(calc.two);
+        botClick(p);
+        botClick(div);
+        p = calc.getButtonLocation(calc.three);
+        botClick(p);
+        p = calc.getButtonLocation(calc.four);
+        botClick(p);
+        p = calc.getButtonLocation(calc.five);
+        botClick(p);
+        p = calc.getButtonLocation(calc.six);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.three);
+        botClick(p);
+        p = calc.getButtonLocation(calc.four);
+        botClick(p);
+        botClick(equal);
+        assertEquals(0.00029511, calc.getValue(),0.000000001);
+        
         System.out.println("value is " + Double.toString(calc.getValue()));
         
     }
