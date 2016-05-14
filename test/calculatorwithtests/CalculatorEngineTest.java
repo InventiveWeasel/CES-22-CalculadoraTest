@@ -37,6 +37,13 @@ public class CalculatorEngineTest{
         Point p;
         Point clr = calc.getButtonLocation(calc.clear);
         Point comma = calc.getButtonLocation(calc.comma);
+        Point plus = calc.getButtonLocation(calc.plus);
+        Point minus = calc.getButtonLocation(calc.minus);
+        Point div = calc.getButtonLocation(calc.div);
+        Point mult = calc.getButtonLocation(calc.mult);
+        Point equal = calc.getButtonLocation(calc.equal);
+        
+
         //Testando a inserção de caracteres no display
         //Testando o número 123
         p = calc.getButtonLocation(calc.one);
@@ -68,10 +75,30 @@ public class CalculatorEngineTest{
         p = calc.getButtonLocation(calc.one);
         botClick(p);
         botClick(comma);
+        p = calc.getButtonLocation(calc.zero);
+        botClick(p);
         p = calc.getButtonLocation(calc.two);
         botClick(p);
-        assertEquals(1.2, calc.getValue(),0.0001);
-        //calc.actionPerformed(event);
+        assertEquals(1.02, calc.getValue(),0.0001);
+        
+        //Testando a operação de soma 1,02 + 3456,34 = 3457,36
+        botClick(plus);
+        p = calc.getButtonLocation(calc.three);
+        botClick(p);
+        p = calc.getButtonLocation(calc.four);
+        botClick(p);
+        p = calc.getButtonLocation(calc.five);
+        botClick(p);
+        p = calc.getButtonLocation(calc.six);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.three);
+        botClick(p);
+        p = calc.getButtonLocation(calc.four);
+        botClick(p);
+        botClick(equal);
+        assertEquals(3457.36, calc.getValue(),0.0001);
+        
         System.out.println("value is " + Double.toString(calc.getValue()));
     }
 
