@@ -15,7 +15,8 @@ public class CalculatorWithTests {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        CalculatorEngine calc = new CalculatorEngine();
+        calc.initialize();
     }
     
 }
