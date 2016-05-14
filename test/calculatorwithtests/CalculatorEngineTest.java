@@ -197,7 +197,17 @@ public class CalculatorEngineTest{
         assertEquals(1.02, calc.getValue(),0.000000001);
         
        
-        
+        //Teste para o botão de porcentagem
+        botClick(clr);
+        p = calc.getButtonLocation(calc.one);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.zero);
+        botClick(p);
+        p = calc.getButtonLocation(calc.two);
+        botClick(p);
+        botClick(perc);
+        assertEquals(0.0102, calc.getValue(),0.000000001);
         
         System.out.println("value is " + Double.toString(calc.getValue()));
         
