@@ -5,8 +5,13 @@
  */
 package calculatorwithtests;
 
+import java.awt.AWTException;
 import java.awt.Point;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -17,30 +22,10 @@ import static org.junit.Assert.*;
  *
  * @author Ana Cuder
  */
-public class CalculatorEngineTest {
+public class CalculatorEngineTest{
     
-    public CalculatorEngineTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    CalculatorEngine calc = new CalculatorEngine();
 
-    /**
-     * Test of initialize method, of class CalculatorEngine.
-     */
-    @Test
-    public void testInitialize() {
-        System.out.println("initialize");
-        CalculatorEngine instance = new CalculatorEngine();
-        instance.initialize();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of actionPerformed method, of class CalculatorEngine.
@@ -48,53 +33,71 @@ public class CalculatorEngineTest {
     @Test
     public void testActionPerformed() {
         System.out.println("actionPerformed");
-        ActionEvent event = null;
-        CalculatorEngine instance = new CalculatorEngine();
-        instance.actionPerformed(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        calc.initialize();
+        Point p;
+        Point clr = calc.getButtonLocation(calc.clear);
+        Point comma = calc.getButtonLocation(calc.comma);
+        //Testando a inserção de caracteres no display
+        //Testando o número 123
+        p = calc.getButtonLocation(calc.one);
+        botClick(p);
+        p = calc.getButtonLocation(calc.two);
+        botClick(p);
+        p = calc.getButtonLocation(calc.three);
+        botClick(p);
+        assertEquals(123, calc.getValue(), 0.0001);
+        //Testando 4567890
+        botClick(clr);
+        p = calc.getButtonLocation(calc.four);
+        botClick(p);
+        p = calc.getButtonLocation(calc.five);
+        botClick(p);
+        p = calc.getButtonLocation(calc.six);
+        botClick(p);
+        p = calc.getButtonLocation(calc.seven);
+        botClick(p);
+        p = calc.getButtonLocation(calc.eight);
+        botClick(p);
+        p = calc.getButtonLocation(calc.nine);
+        botClick(p);
+        p = calc.getButtonLocation(calc.zero);
+        botClick(p);
+        assertEquals(4567890, calc.getValue(), 0.0001);
+        botClick(clr);
+        //Testando 1,02
+        p = calc.getButtonLocation(calc.one);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.two);
+        botClick(p);
+        assertEquals(1.2, calc.getValue(),0.0001);
+        //calc.actionPerformed(event);
+        System.out.println("value is " + Double.toString(calc.getValue()));
     }
 
-    /**
-     * Test of insert method, of class CalculatorEngine.
-     */
+    /*
     @Test
     public void testInsert() {
         System.out.println("insert");
         int x = 0;
         CalculatorEngine instance = new CalculatorEngine();
         instance.insert(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getButtonLocation method, of class CalculatorEngine.
-     */
-    @Test
-    public void testGetButtonLocation() {
-        System.out.println("getButtonLocation");
-        JButton b = null;
-        CalculatorEngine instance = new CalculatorEngine();
-        Point expResult = null;
-        Point result = instance.getButtonLocation(b);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getValue method, of class CalculatorEngine.
-     */
-    @Test
-    public void testGetValue() {
-        System.out.println("getValue");
-        CalculatorEngine instance = new CalculatorEngine();
-        double expResult = 0.0;
-        double result = instance.getValue();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    */
+    
+    public void botClick(Point p){
+        Robot bot;
+        try {
+            bot = new Robot();
+        } catch (AWTException ex) {
+            Logger.getLogger(CalculatorEngineTest.class.getName()).log(Level.SEVERE, null, ex);
+            bot = null;
+        }
+        bot.mouseMove(p.x,p.y);
+        bot.mousePress(InputEvent.BUTTON1_MASK);
+        try{Thread.sleep(250);}catch(InterruptedException e){}
+        bot.mouseRelease(InputEvent.BUTTON1_MASK);
+        try{Thread.sleep(250);}catch(InterruptedException e){}
     }
     
 }
