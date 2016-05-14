@@ -42,7 +42,8 @@ public class CalculatorEngineTest{
         Point div = calc.getButtonLocation(calc.div);
         Point mult = calc.getButtonLocation(calc.mult);
         Point equal = calc.getButtonLocation(calc.equal);
-        
+        Point moreLess = calc.getButtonLocation(calc.moreLess);
+        Point perc = calc.getButtonLocation(calc.perc);
 
         //Testando a inserção de caracteres no display
         //Testando o número 123
@@ -179,6 +180,24 @@ public class CalculatorEngineTest{
         botClick(p);
         botClick(equal);
         assertEquals(0.00029511, calc.getValue(),0.000000001);
+        
+        
+        //Teste para inversao de sinal 1,02 => -1,02 => 1,02
+        botClick(clr);
+        p = calc.getButtonLocation(calc.one);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.zero);
+        botClick(p);
+        p = calc.getButtonLocation(calc.two);
+        botClick(p);
+        botClick(moreLess);
+        assertEquals(-1.02, calc.getValue(),0.000000001);
+        botClick(moreLess);
+        assertEquals(1.02, calc.getValue(),0.000000001);
+        
+       
+        
         
         System.out.println("value is " + Double.toString(calc.getValue()));
         
