@@ -97,9 +97,64 @@ public class CalculatorEngineTest{
         p = calc.getButtonLocation(calc.four);
         botClick(p);
         botClick(equal);
-        assertEquals(3457.36, calc.getValue(),0.0001);
+        assertEquals(3457.36, calc.getValue(),0.000000001);
+        
+        
+        //Testando a operação de subtração 1,02 - 3456,34 = -3455,32
+        botClick(clr);
+        p = calc.getButtonLocation(calc.one);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.zero);
+        botClick(p);
+        p = calc.getButtonLocation(calc.two);
+        botClick(p);
+        botClick(minus);
+        p = calc.getButtonLocation(calc.three);
+        botClick(p);
+        p = calc.getButtonLocation(calc.four);
+        botClick(p);
+        p = calc.getButtonLocation(calc.five);
+        botClick(p);
+        p = calc.getButtonLocation(calc.six);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.three);
+        botClick(p);
+        p = calc.getButtonLocation(calc.four);
+        botClick(p);
+        botClick(equal);
+        assertEquals(-3455.32, calc.getValue(),0.000000001);
+        
+        
+        //Testando a operacao de multiplicacao: 1,02 * 3456,34 = 3525,4668
+        botClick(clr);
+        p = calc.getButtonLocation(calc.one);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.zero);
+        botClick(p);
+        p = calc.getButtonLocation(calc.two);
+        botClick(p);
+        botClick(mult);
+        p = calc.getButtonLocation(calc.three);
+        botClick(p);
+        p = calc.getButtonLocation(calc.four);
+        botClick(p);
+        p = calc.getButtonLocation(calc.five);
+        botClick(p);
+        p = calc.getButtonLocation(calc.six);
+        botClick(p);
+        botClick(comma);
+        p = calc.getButtonLocation(calc.three);
+        botClick(p);
+        p = calc.getButtonLocation(calc.four);
+        botClick(p);
+        botClick(equal);
+        assertEquals(3525.4668, calc.getValue(),0.000000001);
         
         System.out.println("value is " + Double.toString(calc.getValue()));
+        
     }
 
     /*
